@@ -6,5 +6,9 @@ import java.util.ArrayList;
  *
  */
 public class Res {
-    public ArrayList<Resp> resp;
+    private ArrayList<Resp> resp;
+
+    public ArrayList<Resp> getResp() {
+        return resp;
+    }
 }
