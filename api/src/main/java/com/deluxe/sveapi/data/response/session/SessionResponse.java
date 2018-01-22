@@ -1,6 +1,6 @@
-package com.deluxe.svesdk.data.response.session;
+package com.deluxe.sveapi.data.response.session;
 
-import com.deluxe.svesdk.data.response.common.BaseResponse;
+import com.deluxe.sveapi.data.response.common.BaseResponse;
 import com.google.gson.annotations.SerializedName;
 
 /**

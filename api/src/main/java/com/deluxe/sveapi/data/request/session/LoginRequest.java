@@ -1,6 +1,6 @@
-package com.deluxe.svesdk.data.request.session;
+package com.deluxe.sveapi.data.request.session;
 
-import com.deluxe.svesdk.data.request.common.CommonRequest;
+import com.deluxe.sveapi.data.request.common.CommonRequest;
 
 public class LoginRequest extends CommonRequest {
 

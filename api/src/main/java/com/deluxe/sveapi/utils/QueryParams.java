@@ -1,4 +1,4 @@
-package com.deluxe.svesdk.utils;
+package com.deluxe.sveapi.utils;
 
 public class QueryParams {
 

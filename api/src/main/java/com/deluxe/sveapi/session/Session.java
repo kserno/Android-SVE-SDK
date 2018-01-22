@@ -1,8 +1,8 @@
-package com.deluxe.svesdk.session;
+package com.deluxe.sveapi.session;
 
-import com.deluxe.svesdk.data.request.session.LoginRequest;
-import com.deluxe.svesdk.data.response.common.BaseResponse;
-import com.deluxe.svesdk.data.response.session.SessionResponse;
+import com.deluxe.sveapi.data.request.session.LoginRequest;
+import com.deluxe.sveapi.data.response.common.BaseResponse;
+import com.deluxe.sveapi.data.response.session.SessionResponse;
 
 import retrofit2.Call;
 

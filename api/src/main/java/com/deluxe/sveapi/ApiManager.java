@@ -1,11 +1,11 @@
-package com.deluxe.svesdk;
+package com.deluxe.sveapi;
 
-import com.deluxe.svesdk.data.request.session.LoginRequest;
-import com.deluxe.svesdk.data.response.common.BaseResponse;
-import com.deluxe.svesdk.data.response.session.SessionResponse;
-import com.deluxe.svesdk.session.Session;
-import com.deluxe.svesdk.session.SessionService;
-import com.deluxe.svesdk.utils.QueryParams;
+import com.deluxe.sveapi.data.request.session.LoginRequest;
+import com.deluxe.sveapi.data.response.common.BaseResponse;
+import com.deluxe.sveapi.data.response.session.SessionResponse;
+import com.deluxe.sveapi.session.Session;
+import com.deluxe.sveapi.session.SessionService;
+import com.deluxe.sveapi.utils.QueryParams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

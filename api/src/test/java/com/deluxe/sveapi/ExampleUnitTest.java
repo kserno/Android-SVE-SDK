@@ -1,4 +1,4 @@
-package com.deluxe.svesdk;
+package com.deluxe.sveapi;
 
 import org.junit.Test;
 
