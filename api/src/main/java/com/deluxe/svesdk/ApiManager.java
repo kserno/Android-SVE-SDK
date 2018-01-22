@@ -1,6 +1,8 @@
 package com.deluxe.svesdk;
 
+import com.deluxe.svesdk.data.request.session.LoginRequest;
 import com.deluxe.svesdk.data.response.common.BaseResponse;
+import com.deluxe.svesdk.data.response.session.SessionResponse;
 import com.deluxe.svesdk.session.Session;
 import com.deluxe.svesdk.session.SessionService;
 import com.google.gson.Gson;
@@ -21,9 +23,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager implements Session {
 
+    private static final String API_VERSION = "v10";
+    private static final String API_M_TYPE = "json";
+
     private Retrofit retrofit;
 
-    private SessionService menuService;
+    private SessionService sessionService;
 
     private OkHttpClient getHttpLogInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -70,17 +75,22 @@ public class ApiManager implements Session {
 
     public ApiManager() {
 
-        String domain = "";
-        String port = "";
+        String domain = "http://cfe.sve-test2.datahub-testzone.com";
+        String port = "8080";
         retrofit = getHostAdapter(domain, port);
 
-        menuService = retrofit.create(SessionService.class);
+        sessionService = retrofit.create(SessionService.class);
 
     }
 
     @Override
     public Call<BaseResponse> isVersionSupported() {
-        return menuService.isVersionSupported("version", "mtype", new Hashtable<String, String>());
+        return sessionService.isVersionSupported(API_VERSION, API_M_TYPE, new Hashtable<String, String>());
+    }
+
+    @Override
+    public Call<SessionResponse> login(LoginRequest loginRequest) {
+        return sessionService.login(API_VERSION, loginRequest, API_M_TYPE);
     }
 
 }
