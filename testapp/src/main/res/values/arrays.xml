@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tenant_ids">
+        <item>ee58b1d8-bc3d-4231-b420-f6ce2e9287a6</item>
+        <item>00000000-0000-4000-0000-000000000001</item>
+        <item>00000000-0000-4000-0000-000000000002</item>
+        <item>00000000-0000-4000-0000-000000000003</item>
+        <item>00000000-0000-4000-0000-000000000004</item>
+        <item>00000000-0000-4000-0000-000000000005</item>
+        <item>00000000-0000-4000-0000-000000000006</item>
+        <item>00000000-0000-4000-0000-000000000007</item>
+        <item>00000000-0000-4000-0000-000000000008</item>
+        <item>00000000-0000-4000-0000-000000000009</item>
+        <item>00000000-0000-4000-0000-000000000010</item>
+    </string-array>
+    <string-array name="device_types">
+        <item>default</item>
+        <item>m_AndroidPhoneBig</item>
+        <item>m_AndroidPhoneSmall</item>
+        <item>m_AndroidSTB</item>
+        <item>m_AndroidTabletBig</item>
+        <item>m_AndroidTabletSmall</item>
+        <item>m_iPad</item>
+        <item>m_iPhone</item>
+        <item>m_Playstation</item>
+        <item>m_Roku</item>
+        <item>m_SmartTV</item>
+        <item>m_webclient</item>
+        <item>m_XBOX</item>
+    </string-array>
+</resources>

@@ -25,3 +25,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    dagger2Version = '2.14.1'
+    supportLibVersion = '26.1.0'
+    butterknifeVersion = '8.8.1'
+}
