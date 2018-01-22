@@ -7,6 +7,6 @@ import com.deluxe.svesdk.data.response.session.SessionResponse;
 import retrofit2.Call;
 
 public interface Session {
-    Call<BaseResponse> isVersionSupported();
+    Call<BaseResponse> isVersionSupported(String deviceType, String majorVersion, String minorVersion, String tenantId, String language);
     Call<SessionResponse> login(LoginRequest loginRequest);
 }

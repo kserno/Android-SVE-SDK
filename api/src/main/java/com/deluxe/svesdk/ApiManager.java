@@ -5,6 +5,7 @@ import com.deluxe.svesdk.data.response.common.BaseResponse;
 import com.deluxe.svesdk.data.response.session.SessionResponse;
 import com.deluxe.svesdk.session.Session;
 import com.deluxe.svesdk.session.SessionService;
+import com.deluxe.svesdk.utils.QueryParams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -73,10 +74,10 @@ public class ApiManager implements Session {
                 .create();
     }
 
-    public ApiManager() {
+    public ApiManager(String domain, String port) {
 
-        String domain = "http://cfe.sve-test2.datahub-testzone.com";
-        String port = "8080";
+//        String domain = "http://cfe.sve-test2.datahub-testzone.com";
+//        String port = "8080";
         retrofit = getHostAdapter(domain, port);
 
         sessionService = retrofit.create(SessionService.class);
@@ -84,8 +85,14 @@ public class ApiManager implements Session {
     }
 
     @Override
-    public Call<BaseResponse> isVersionSupported() {
-        return sessionService.isVersionSupported(API_VERSION, API_M_TYPE, new Hashtable<String, String>());
+    public Call<BaseResponse> isVersionSupported(String deviceType, String majorVersion, String minorVersion, String tenantId, String language) {
+        Hashtable<String,String> serviceQueryParams = new Hashtable<>();
+        serviceQueryParams.put(QueryParams.D_TYPE, deviceType);
+        serviceQueryParams.put(QueryParams.MA_VER, majorVersion);
+        serviceQueryParams.put(QueryParams.MI_VER, minorVersion);
+        serviceQueryParams.put(QueryParams.TENANT_ID, tenantId);
+        serviceQueryParams.put(QueryParams.LANG, language);
+        return sessionService.isVersionSupported(API_VERSION, API_M_TYPE, serviceQueryParams);
     }
 
     @Override
