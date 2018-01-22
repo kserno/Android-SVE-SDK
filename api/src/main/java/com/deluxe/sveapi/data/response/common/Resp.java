@@ -1,4 +1,4 @@
-package com.deluxe.svesdk.data.response.common;
+package com.deluxe.sveapi.data.response.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;

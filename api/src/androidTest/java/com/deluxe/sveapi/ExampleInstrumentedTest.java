@@ -1,4 +1,4 @@
-package com.deluxe.svesdk;
+package com.deluxe.sveapi;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

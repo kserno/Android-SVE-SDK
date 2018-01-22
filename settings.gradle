@@ -1,1 +1,1 @@
-include ':api', ':testapp'
+include ':api', ':testapp', ':sdk'
