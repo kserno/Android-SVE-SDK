@@ -1,11 +1,11 @@
 package com.deluxe.testapp.connect;
 
-import com.deluxe.svesdk.ApiManager;
+import com.deluxe.sveapi.ApiManager;
+import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.Backend;
-import com.deluxe.testapp.Router;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -33,7 +33,6 @@ public class ConnectPresenter {
     public void onCreate(ConnectScreen screen) {
         screen.setBackend(mBackends[0]);
     }
-
 
     public void onSelectBackendClicked(ConnectScreen screen) {
         CharSequence[] items = new CharSequence[mBackends.length];
@@ -65,5 +64,9 @@ public class ConnectPresenter {
         screen.showLoading();
 
 
+        // SDK is not implemented enough yet
+
+
     }
+
 }
