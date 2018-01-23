@@ -27,9 +27,16 @@ public class ApiManager implements Session {
     private static final String API_VERSION = "v10";
     private static final String API_M_TYPE = "json";
 
-    private Retrofit retrofit;
+    private Retrofit retrofitSve;
+    private Retrofit retrofitNps;
+    private Retrofit retrofitMcs;
 
+    // Sve services
     private SessionService sessionService;
+
+    // TODO nps services
+
+    // TODO mcs services
 
     private OkHttpClient getHttpLogInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -60,9 +67,9 @@ public class ApiManager implements Session {
                 .build();
     }
 
-    Retrofit getHostAdapter(String endpoint, String port) {
+    Retrofit getHostAdapter(String endpoint) {
         return new Retrofit.Builder()
-                .baseUrl(endpoint + port)
+                .baseUrl(endpoint)
                 .client(getHttpLogInterceptor())
                 .addConverterFactory(GsonConverterFactory.create(getGson()))
                 .build();
@@ -74,12 +81,64 @@ public class ApiManager implements Session {
                 .create();
     }
 
-    public ApiManager(String domain, String port) {
+    /**
+     * Default constructor. Endpoints must be set prior to service use, please see {@link ApiManager#setEndpoints(String, String, String)}.
+     */
+    public ApiManager() {
 
-        retrofit = getHostAdapter(domain, port);
+    }
 
-        sessionService = retrofit.create(SessionService.class);
+    /**
+     * Constructor that also sets endpoint for services used by this API manager.
+     * @param sveEndpoint Endpoint to sve services
+     * @param npsEndpoint Endpoint to nps services
+     * @param mcsEndpoint Endpoint to mcs services
+     */
+    public ApiManager(String sveEndpoint, String npsEndpoint, String mcsEndpoint) {
+        setEndpoints(sveEndpoint, npsEndpoint, mcsEndpoint);
+    }
 
+    /**
+     * Sets endpoint for services used by this API manager.
+     * @param sveEndpoint Endpoint to sve services
+     * @param npsEndpoint Endpoint to nps services
+     * @param mcsEndpoint Endpoint to mcs services
+     */
+    public void setEndpoints(String sveEndpoint, String npsEndpoint, String mcsEndpoint) {
+        setEndpointSve(sveEndpoint);
+        setEndpointNps(npsEndpoint);
+        setEndpointMcs(mcsEndpoint);
+    }
+
+    /**
+     * Sets endpoint for sve services used by this API manager.
+     * @param sveEndpoint Endpoint to sve services
+     */
+    public void setEndpointSve(String sveEndpoint) {
+
+        retrofitSve = getHostAdapter(sveEndpoint);
+
+        sessionService = retrofitSve.create(SessionService.class);
+    }
+
+    /**
+     * Sets endpoint for nps services used by this API manager.
+     * @param npsEndpoint Endpoint to nps services
+     */
+    public void setEndpointNps(String npsEndpoint) {
+
+        retrofitNps = getHostAdapter(npsEndpoint);
+        // TODO create nps services
+    }
+
+    /**
+     * Sets endpoint for mcs services used by this API manager.
+     * @param mcsEndpoint Endpoint to mcs services
+     */
+    public void setEndpointMcs(String mcsEndpoint) {
+
+        retrofitMcs = getHostAdapter(mcsEndpoint);
+        // TODO create mcs services
     }
 
     @Override

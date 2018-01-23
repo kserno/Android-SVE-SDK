@@ -39,35 +39,56 @@ public class SdkManager {
 
     /**
      * Sets manager class.
-     * @param domain Domain part of server url
-     * @param port   Port part of server url
+     *
+     * To properly setup:
+     * 1: call {@link SdkManager#onApplicationCreate(String, String, String, String, Consts.DRM_SOLUTION)}
+     * 2: when server endpoint are picked call {@link SdkManager#setEndpoints(String, String, String)}
+     *
+     * Then SDK manager will be available to proper use.
      */
-    public SdkManager(String domain, String port) {
-//        String domain = "http://cfe.sve-test2.datahub-testzone.com";
-//        String port = "8080";
-        this.domain = domain;
-        this.port = port;
-
+    public SdkManager() {
         sdkData = new SdkData();
-        apiManager = new ApiManager(domain, port);
+        apiManager = new ApiManager();
 
         globalQueryParams = new HashMap<>();
         queryParamsSetup();
     }
 
+    /**
+     * Initial setup of query parameters, that are usually constant for the lifecycle of this SDK manager
+     */
     protected void queryParamsSetup() {
         globalQueryParams.put(QueryParams.OS_ID, Build.VERSION.RELEASE.trim());
         globalQueryParams.put(QueryParams.SC, "true");
         globalQueryParams.put(QueryParams.TIME, "60");
         globalQueryParams.put(QueryParams.LANG, "en");
-        globalQueryParams.put(QueryParams.M_TYPE, "xml");
+        globalQueryParams.put(QueryParams.M_TYPE, "json");
         globalQueryParams.put(QueryParams.SCL_VER, "0");
         globalQueryParams.put(QueryParams.MA_VER, "4");
         globalQueryParams.put(QueryParams.MI_VER, "0");
         globalQueryParams.put(QueryParams.OMI_TYPE, "WEB_ANDROID");
     }
 
-    public void onApplicationCreated(String deviceType, String deviceId, String tenantId, String swipeType, Consts.DRM_SOLUTION drmSolution) {
+    /**
+     * Mandatory setup - sets endpoints for services used in API manager
+     * @param sveEndpoint Endpoint to sve services
+     * @param npsEndpoint Endpoint to nps services
+     * @param mcsEndpoint Endpoint to mcs services
+     */
+    public void setEndpoints(String sveEndpoint, String npsEndpoint, String mcsEndpoint) {
+        apiManager.setEndpoints(sveEndpoint, npsEndpoint, mcsEndpoint);
+    }
+
+    /**
+     * Mandatory setup - sets query parameters, that are usually constant for the lifecycle of this SDK manager,
+     * but have to be generated from Context in Application onCreate.
+     * @param deviceType  Device type that should be used in service calls
+     * @param deviceId    Device id that should be used in service calls
+     * @param tenantId    Tenant id that should be used in service calls
+     * @param swipeType   Swipe type that should be used in service calls
+     * @param drmSolution Requested Drm solution
+     */
+    public void onApplicationCreate(String deviceType, String deviceId, String tenantId, String swipeType, Consts.DRM_SOLUTION drmSolution) {
         globalQueryParams.put(QueryParams.TENANT_ID, tenantId);
 
         globalQueryParams.put(QueryParams.D_TYPE, deviceType);
