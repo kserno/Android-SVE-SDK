@@ -1,8 +1,5 @@
 package com.deluxe.svesdk;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.deluxe.sveapi.ApiManager;
@@ -14,8 +11,6 @@ import com.deluxe.svesdk.mapper.common.BaseResponseMapper;
 import com.deluxe.svesdk.model.session.SessionModel;
 import com.deluxe.svesdk.utils.Consts;
 import com.deluxe.svesdk.utils.SessionRequestBuilder;
-
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +28,6 @@ public class SdkManager {
 
     protected ApiManager apiManager;
 
-    protected HashMap<String, String> globalQueryParams;
-
     protected SdkData sdkData;
 
     /**
@@ -50,7 +43,6 @@ public class SdkManager {
         sdkData = new SdkData();
         apiManager = new ApiManager();
 
-        globalQueryParams = new HashMap<>();
         queryParamsSetup();
     }
 
@@ -58,15 +50,15 @@ public class SdkManager {
      * Initial setup of query parameters, that are usually constant for the lifecycle of this SDK manager
      */
     protected void queryParamsSetup() {
-        globalQueryParams.put(QueryParams.OS_ID, Build.VERSION.RELEASE.trim());
-        globalQueryParams.put(QueryParams.SC, "true");
-        globalQueryParams.put(QueryParams.TIME, "60");
-        globalQueryParams.put(QueryParams.LANG, "en");
-        globalQueryParams.put(QueryParams.M_TYPE, "json");
-        globalQueryParams.put(QueryParams.SCL_VER, "0");
-        globalQueryParams.put(QueryParams.MA_VER, "4");
-        globalQueryParams.put(QueryParams.MI_VER, "0");
-        globalQueryParams.put(QueryParams.OMI_TYPE, "WEB_ANDROID");
+        sdkData.putGlobalQueryParamValue(QueryParams.OS_ID, Build.VERSION.RELEASE.trim());
+        sdkData.putGlobalQueryParamValue(QueryParams.SC, "true");
+        sdkData.putGlobalQueryParamValue(QueryParams.TIME, "60");
+        sdkData.putGlobalQueryParamValue(QueryParams.LANG, "en");
+        sdkData.putGlobalQueryParamValue(QueryParams.M_TYPE, "json");
+        sdkData.putGlobalQueryParamValue(QueryParams.SCL_VER, "0");
+        sdkData.putGlobalQueryParamValue(QueryParams.MA_VER, "4");
+        sdkData.putGlobalQueryParamValue(QueryParams.MI_VER, "0");
+        sdkData.putGlobalQueryParamValue(QueryParams.OMI_TYPE, "WEB_ANDROID");
     }
 
     /**
@@ -89,14 +81,14 @@ public class SdkManager {
      * @param drmSolution Requested Drm solution
      */
     public void onApplicationCreate(String deviceType, String deviceId, String tenantId, String swipeType, Consts.DRM_SOLUTION drmSolution) {
-        globalQueryParams.put(QueryParams.TENANT_ID, tenantId);
+        sdkData.putGlobalQueryParamValue(QueryParams.TENANT_ID, tenantId);
 
-        globalQueryParams.put(QueryParams.D_TYPE, deviceType);
-        globalQueryParams.put(QueryParams.DEVICE_TYPE, deviceType);
+        sdkData.putGlobalQueryParamValue(QueryParams.D_TYPE, deviceType);
+        sdkData.putGlobalQueryParamValue(QueryParams.DEVICE_TYPE, deviceType);
 
-        globalQueryParams.put(QueryParams.V_D_ID, deviceId);
-        globalQueryParams.put(QueryParams.D_ID, deviceId);
-        globalQueryParams.put(QueryParams.SWIPE_TYPE, swipeType);
+        sdkData.putGlobalQueryParamValue(QueryParams.V_D_ID, deviceId);
+        sdkData.putGlobalQueryParamValue(QueryParams.D_ID, deviceId);
+        sdkData.putGlobalQueryParamValue(QueryParams.SWIPE_TYPE, swipeType);
 
         sdkData.setDrmSolution(drmSolution);
     }
@@ -115,11 +107,11 @@ public class SdkManager {
      * @param apiCallback Callback object to report result of call.
      */
     public void aquireSession(final ApiCallback<SessionModel> apiCallback) {
-        String deviceType = globalQueryParams.get(QueryParams.D_TYPE);
-        String majorVersion = globalQueryParams.get(QueryParams.MA_VER);
-        String minorVersion = globalQueryParams.get(QueryParams.MI_VER);
-        String tenantId = globalQueryParams.get(QueryParams.TENANT_ID);
-        String language = globalQueryParams.get(QueryParams.LANG);
+        String deviceType = sdkData.getGlobalQueryParamValue(QueryParams.D_TYPE);
+        String majorVersion = sdkData.getGlobalQueryParamValue(QueryParams.MA_VER);
+        String minorVersion = sdkData.getGlobalQueryParamValue(QueryParams.MI_VER);
+        String tenantId = sdkData.getGlobalQueryParamValue(QueryParams.TENANT_ID);
+        String language = sdkData.getGlobalQueryParamValue(QueryParams.LANG);
         Call<BaseResponse> call = apiManager.isVersionSupported(deviceType, majorVersion, minorVersion, tenantId, language);
         call.enqueue(new Callback<BaseResponse>() {
             @Override
@@ -155,7 +147,7 @@ public class SdkManager {
         // TODO pick values from persisted data
         String userId = "";
         String oneTimeToken = "";
-        LoginRequest loginRequest = SessionRequestBuilder.autoLogin(sdkData, globalQueryParams, userId, oneTimeToken).buildRequestLogin();
+        LoginRequest loginRequest = SessionRequestBuilder.autoLogin(sdkData, userId, oneTimeToken).buildRequestLogin();
         Call<SessionResponse> call = apiManager.login(loginRequest);
         call.enqueue(new Callback<SessionResponse>() {
             @Override
@@ -169,7 +161,7 @@ public class SdkManager {
 
                 // save session id
                 String sessionId = response.body().getS_id();
-                globalQueryParams.put(QueryParams.S_ID, sessionId);
+                sdkData.putGlobalQueryParamValue(QueryParams.S_ID, sessionId);
                 sdkData.setSessionId(sessionId);
 
                 // TODO save other values from Session response

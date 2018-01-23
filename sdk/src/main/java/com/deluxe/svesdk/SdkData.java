@@ -2,10 +2,14 @@ package com.deluxe.svesdk;
 
 import com.deluxe.svesdk.utils.Consts;
 
+import java.util.HashMap;
+
 /**
  * Data object that bundles all values that persist SDK manager lifecycle.
  */
 public class SdkData {
+
+    protected HashMap<String, String> globalQueryParams = new HashMap<>();
 
     protected Consts.DRM_SOLUTION drmSolution = Consts.DRM_SOLUTION.NO_DRM;
 
@@ -20,6 +24,32 @@ public class SdkData {
 //    private ArrayList<DeviceSlot> mSlotList;
     protected int maxSubAccounts = -1;
     protected String appVersion = "";
+
+    /**
+     * Returns hash map of all query parameters set
+     * @return Hash map of query parameters.
+     */
+    public HashMap<String, String> getGlobalQueryParams() {
+        return globalQueryParams;
+    }
+
+    /**
+     * Returns value of previously set global parameter.
+     * @param queryParam Parameter name
+     * @return Value of parameter
+     */
+    public String getGlobalQueryParamValue(String queryParam) {
+        return globalQueryParams.get(queryParam);
+    }
+
+    /**
+     * Sets value of global parameter.
+     * @param queryParam Parameter name
+     * @param value      Value of parameter
+     */
+    public void putGlobalQueryParamValue(String queryParam, String value) {
+        globalQueryParams.put(queryParam, value);
+    }
 
     /**
      * Returns previously set preferred drm solution. Available options in {@link Consts}.
