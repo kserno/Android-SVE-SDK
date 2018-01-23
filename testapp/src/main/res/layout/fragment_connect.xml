@@ -27,7 +27,7 @@
                     android:id="@+id/et_playout_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/playout_url"
+                    android:hint="@string/title_playout_url"
                     android:inputType="textWebEditText"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -43,7 +43,7 @@
                     android:id="@+id/et_nps_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nps_url"
+                    android:hint="@string/title_nps_url"
                     android:inputType="textWebEditText"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +59,7 @@
                     android:id="@+id/et_backend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/select_backend"
+                    android:hint="@string/title_select_backend"
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -75,7 +75,7 @@
                     android:id="@+id/et_tenant_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/tenant_id"
+                    android:hint="@string/title_tenant_id"
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -91,7 +91,7 @@
                     android:id="@+id/et_device_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/device_type"
+                    android:hint="@string/title_device_type"
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -107,7 +107,7 @@
                     android:id="@+id/et_device_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/device_id"
+                    android:hint="@string/title_device_id"
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 

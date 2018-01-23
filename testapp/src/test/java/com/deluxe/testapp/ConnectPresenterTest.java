@@ -38,4 +38,18 @@ public class ConnectPresenterTest {
         mPresenter.onSelectTenantIdClicked(mConnectScreen);
         Mockito.verify(mConnectScreen).showTenantIdSelectionDialog();
     }
+
+    @Test
+    public void shouldOpenDeviceTypeSelectionDialogOnDeviceTypeClicked() throws Exception {
+        mPresenter.onSelectDeviceTypeClicked(mConnectScreen);
+        Mockito.verify(mConnectScreen).showDeviceTypeSelectionDialog();
+    }
+
+    @Test
+    public void shouldSetBackendOnBackendSelected() throws Exception {
+        mPresenter.onBackendSelected(mConnectScreen, 0);
+        Mockito.verify(mConnectScreen).setBackend(ArgumentMatchers.any(Backend.class));
+    }
+
+
 }

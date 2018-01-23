@@ -17,6 +17,8 @@ public class ConnectPresenter {
 
     private static final String TAG = ConnectPresenter.class.getSimpleName();
 
+    private SdkManager mSdkManager;
+
     private Backend[] mBackends = {
             new Backend("SVE_PROD_32","prod-3.2","http://cfe.sve32-prod.datahub-testzone.com", "http://cfe.sve32-prod.datahub-testzone.com"),
             new Backend("SVE_PROD_31", "prod-3.1","http://cfe.sve31-prod.datahub-testzone.com", "http://cfe.sve31-prod.datahub-testzone.com"),
@@ -29,7 +31,9 @@ public class ConnectPresenter {
     };
 
     @Inject
-    public ConnectPresenter() {}
+    public ConnectPresenter(SdkManager sdkManager) {
+        mSdkManager = sdkManager;
+    }
 
     public void onCreate(ConnectScreen screen) {
         screen.setBackend(mBackends[0]);
@@ -61,10 +65,17 @@ public class ConnectPresenter {
     }
 
 
-    public void connect(ConnectScreen screen) {
-        screen.showLoading();
-        SdkManager sdkManager = new SdkManager();
+    public void connect(ConnectScreen screen,
+                        String playoutUrl,
+                        String npsUrl,
+                        String tenantId,
+                        String deviceType,
+                        String deviceId) {
 
+        screen.showLoading();
+
+
+        mSdkManager.setEndpoints(playoutUrl, npsUrl, npsUrl);
 
     }
 

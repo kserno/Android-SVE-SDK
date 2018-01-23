@@ -8,16 +8,18 @@ public class Backend {
     private String mBackend;
     private String mLabel;
     private String mPlayoutUrl;
-    private String mNPSUrl;
+    private String mNpsUrl;
+    private String mMcsUrl;
 
     public Backend() {
     }
 
-    public Backend(String backend, String label, String playoutUrl, String NPSUrl) {
+    public Backend(String backend, String label, String playoutUrl, String npsUrl) {
         mBackend = backend;
         mLabel = label;
         mPlayoutUrl = playoutUrl;
-        mNPSUrl = NPSUrl;
+        mNpsUrl = npsUrl;
+        mMcsUrl = npsUrl;
     }
 
     public String getBackend() {
@@ -28,11 +30,15 @@ public class Backend {
         return mPlayoutUrl;
     }
 
-    public String getNPSUrl() {
-        return mNPSUrl;
+    public String getNpsUrl() {
+        return mNpsUrl;
     }
 
     public String getLabel() {
         return mLabel;
+    }
+
+    public String getMcsUrl() {
+        return mMcsUrl;
     }
 }
