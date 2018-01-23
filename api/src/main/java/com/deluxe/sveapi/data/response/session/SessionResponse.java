@@ -4,7 +4,7 @@ import com.deluxe.sveapi.data.response.common.BaseResponse;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Raw response data for session related services.
+ * Raw root response data for session related services.
  */
 public class SessionResponse extends BaseResponse{
 

@@ -1,5 +1,9 @@
 package com.deluxe.svesdk;
 
+/**
+ * Generic callback for service calls.
+ * @param <T> model class that will be retrieved by service call
+ */
 public interface ApiCallback<T> {
 
     /** Successful sdk service response. */

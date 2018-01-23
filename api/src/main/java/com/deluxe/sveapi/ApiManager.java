@@ -38,7 +38,11 @@ public class ApiManager implements Session {
 
     // TODO mcs services
 
-    private OkHttpClient getHttpLogInterceptor() {
+    /**
+     * Creates OkHttpClient with logging interceptor.
+     * @return OkHttpClient to use in retrofit setup
+     */
+    protected OkHttpClient getHttpLogInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         Interceptor interceptorHeaders =  new Interceptor() {
             @Override
@@ -67,7 +71,12 @@ public class ApiManager implements Session {
                 .build();
     }
 
-    Retrofit getHostAdapter(String endpoint) {
+    /**
+     * Builds retrofit for service calls
+     * @param endpoint Endpoint of this retrofit
+     * @return retrofit for service calls
+     */
+    protected Retrofit getHostAdapter(String endpoint) {
         return new Retrofit.Builder()
                 .baseUrl(endpoint)
                 .client(getHttpLogInterceptor())
@@ -75,7 +84,11 @@ public class ApiManager implements Session {
                 .build();
     }
 
-    private Gson getGson() {
+    /**
+     * Provides Gson for {@link GsonConverterFactory} used during retrofit build process.
+     * @return Gson with type adapters set
+     */
+    protected Gson getGson() {
         return new GsonBuilder()
 //                .registerTypeAdapter(LogoutResponse.class, new LogoutResponseTypeAdapter()) -> we can register adapters here
                 .create();

@@ -17,6 +17,10 @@ public class SessionRequestBuilder {
 	protected LoginRequest.LoginInfo loginInfo;
 	protected LoginRequest.DeviceTypeInfo deviceInfo;
 
+	/**
+	 * Helper class using to build session related POST request objects.
+	 * @param sdkData input SdkData which should be used for building
+	 */
 	protected SessionRequestBuilder(SdkData sdkData) {
 		this.sdkData = sdkData;
 		language = sdkData.getGlobalQueryParamValue(QueryParams.LANG);

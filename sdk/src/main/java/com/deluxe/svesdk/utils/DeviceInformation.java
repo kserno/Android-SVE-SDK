@@ -1,47 +1,38 @@
 package com.deluxe.svesdk.utils;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
 /**
- * Created by filipsollar on 23.1.18.
+ * Utility class.
+ *
+ * Helper which provides device information, which can be later passed to Sdk Manager
  */
-
 public class DeviceInformation {
 
     private static final String TAG = DeviceInformation.class.getSimpleName();
 
     private static final String ALLOWED_CHARACTERS_DID ="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
-
+    /**
+     * Helper to generate unique device ID.
+     *
+     * @param context    Input app/activity context
+     * @param tmDevice   Utils.getIMEI(getBaseContext())
+     * @param tmSerial   Utils.getSerial(getBaseContext())
+     * @param macAddress Utils.getMacAddress(getBaseContext())
+     * @return Unique device ID
+     * @throws IllegalStateException
+     */
     public static String getStandardDeviceId(Context context,
                                              String tmDevice,
                                              String tmSerial,
                                              String macAddress) throws IllegalStateException {
-
-        String androidId = "";
-
-
-        androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-        Log.d(TAG, "tmSerial="+tmSerial+" androidId="+androidId+" tmDevice="+tmDevice+" MAC="+macAddress);
 
         if (TextUtils.isEmpty(tmDevice) && TextUtils.isEmpty(macAddress)) {
             // Both values can not be null - throw exception
@@ -83,9 +74,7 @@ public class DeviceInformation {
         }
 
         // concat MAC+IMEI
-        Log.d(TAG, "l1="+byteMac.length+" l2="+byteIMEI.length);
         int size = byteMac.length + byteIMEI.length + bytePrefix.length + bytePostfix.length;
-        Log.d(TAG, "combined length = "+size);
         byte[] byteCombined = new byte[size];
         for (int i=0; i< size; i++) {
             if (i<bytePrefix.length) {
@@ -124,19 +113,16 @@ public class DeviceInformation {
         if( deviceIdFinal.equals("A01_BbGgPZSs/K0ZDofsiiX86g==") ||
                 deviceIdFinal.equals("A01_tYPJSgs9iZ4qc/u9qTnjIg=="))
         {
-            Log.d(TAG, "device id is wrong");
             deviceIdFinal = getRandomDID();
         }
-
-        Log.d(TAG, "deviceIdFinal="+deviceIdFinal);
 
         return deviceIdFinal;
     }
 
     /**
      * Transforms MAC address in 00:11:22:33:44:55 format to byte array representation
-     * @param MAC
-     * @return
+     * @param MAC input address
+     * @return MAC as byte[]
      */
     private static byte[] MACtobyteConverter(String MAC) {
         // first remove all ":" from MAC address
@@ -154,8 +140,8 @@ public class DeviceInformation {
 
     /**
      * Transforms IMEI address format to byte array representation
-     * @param IMEI
-     * @return
+     * @param IMEI input IMEI
+     * @return IMEI as byte[]
      */
     private static byte[] IMEItobyteConverter(String IMEI) {
         // now convert to byte array
@@ -164,13 +150,16 @@ public class DeviceInformation {
             imeiInLong = Long.parseLong(IMEI);
         }
         catch (NumberFormatException e) {
-            Log.w(TAG, "Can't convert IMEI to byte, Illegal number format");
             return null;
         }
         byte[] data = ByteBuffer.allocate(8).putLong(imeiInLong).array();
         return data;
     }
 
+    /**
+     * Random device ID generation, that builds ID of length 22 by using characters from {@link DeviceInformation#ALLOWED_CHARACTERS_DID}
+     * @return random device ID
+     */
     private static String getRandomDID() {
         final SecureRandom random = new SecureRandom();
         final StringBuilder sb = new StringBuilder(22);

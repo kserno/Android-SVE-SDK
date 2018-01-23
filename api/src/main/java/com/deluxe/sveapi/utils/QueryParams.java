@@ -1,5 +1,8 @@
 package com.deluxe.sveapi.utils;
 
+/**
+ * All possible query parameter names that can be used in services.
+ */
 public class QueryParams {
 
     //REQUEST PARAMS
