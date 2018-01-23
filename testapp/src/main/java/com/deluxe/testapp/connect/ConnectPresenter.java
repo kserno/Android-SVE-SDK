@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 public class ConnectPresenter {
 
+    private static final String TAG = ConnectPresenter.class.getSimpleName();
 
     private Backend[] mBackends = {
             new Backend("SVE_PROD_32","prod-3.2","http://cfe.sve32-prod.datahub-testzone.com", "http://cfe.sve32-prod.datahub-testzone.com"),
@@ -62,9 +63,7 @@ public class ConnectPresenter {
 
     public void connect(ConnectScreen screen) {
         screen.showLoading();
-        screen.success();
-
-        // SDK is not implemented enough yet
+        SdkManager sdkManager = new SdkManager();
 
 
     }
