@@ -31,36 +31,36 @@ public class SessionRequestBuilder {
 		loginInfo.swipe_type = queryParams.get(QueryParams.SWIPE_TYPE);
 		loginInfo.tenantId = tenantId;
 
-		// TODO drm solution
-//		switch (GenericInterface.selectedDRMSolution) {
-//			case NXP: {
-//				loginInfo.drm = AssetInstanceItem.DRM_TYPE_VMX;
-//				loginInfo.v_d_id = queryParams.get(QueryParams.V_D_ID);
-//				loginInfo.OMI_type = queryParams.get(QueryParams.OMI_TYPE);
-//				break;
-//			}
-//			case CASTLABS_WIDEVINE: {
-//				loginInfo.drm = AssetInstanceItem.DRM_TYPE_CASTLABS_WIDEVINE;
-//				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
-//				break;
-//			}
-//			case CASTLABS_DASH: {
-//				loginInfo.drm = AssetInstanceItem.DRM_TYPE_CASTLABS_DASH;
-//				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
-//				break;
-//			}
-//			case CASTLABS_PLAYREAD: {
-//				loginInfo.drm = AssetInstanceItem.DRM_TYPE_CASTLABS_PLAYREADY;
-//				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
-//				break;
-//			}
-//			case CASTLABS_HLS: {
-//				loginInfo.drm = AssetInstanceItem.DRM_TYPE_CASTLABS_HLS;
-//				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
-//				break;
-//			}
-//			// here add new DRM solutions in future
-//		}
+		// drm solution
+		switch (sdkData.getDrmSolution()) {
+			case NXP: {
+				loginInfo.drm = Consts.DRM_TYPE_VMX;
+				loginInfo.v_d_id = queryParams.get(QueryParams.V_D_ID);
+				loginInfo.OMI_type = queryParams.get(QueryParams.OMI_TYPE);
+				break;
+			}
+			case CASTLABS_WIDEVINE: {
+				loginInfo.drm = Consts.DRM_TYPE_CASTLABS_WIDEVINE;
+				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
+				break;
+			}
+			case CASTLABS_DASH: {
+				loginInfo.drm = Consts.DRM_TYPE_CASTLABS_DASH;
+				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
+				break;
+			}
+			case CASTLABS_PLAYREAD: {
+				loginInfo.drm = Consts.DRM_TYPE_CASTLABS_PLAYREADY;
+				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
+				break;
+			}
+			case CASTLABS_HLS: {
+				loginInfo.drm = Consts.DRM_TYPE_CASTLABS_HLS;
+				loginInfo.v_d_id = queryParams.get(QueryParams.CL_D_ID);
+				break;
+			}
+			// here add new DRM solutions in future
+		}
 
 		deviceInfo = new LoginRequest.DeviceTypeInfo();
 		deviceInfo.manufacturer = Build.MANUFACTURER;
