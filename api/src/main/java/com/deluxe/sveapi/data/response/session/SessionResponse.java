@@ -4,16 +4,40 @@ import com.deluxe.sveapi.data.response.common.BaseResponse;
 import com.google.gson.annotations.SerializedName;
 
 /**
- *
+ * Raw response data for session related services.
  */
 public class SessionResponse extends BaseResponse{
 
-    public String s_id;
-    public DrmInfo drm_cl;
-    public UserGroup userGroup;
-    public String oneTimeToken;
-    public String u_id;
-    public String npsToken;
+    private String s_id;
+    private DrmInfo drm_cl;
+    private UserGroup userGroup;
+    private String oneTimeToken;
+    private String u_id;
+    private String npsToken;
+
+    public String getS_id() {
+        return s_id;
+    }
+
+    public DrmInfo getDrm_cl() {
+        return drm_cl;
+    }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public String getOneTimeToken() {
+        return oneTimeToken;
+    }
+
+    public String getU_id() {
+        return u_id;
+    }
+
+    public String getNpsToken() {
+        return npsToken;
+    }
 
     public static class DrmInfo {
         public DrmInfoVmx vmx_cl;

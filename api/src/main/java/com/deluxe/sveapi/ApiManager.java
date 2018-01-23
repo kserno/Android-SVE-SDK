@@ -76,8 +76,6 @@ public class ApiManager implements Session {
 
     public ApiManager(String domain, String port) {
 
-//        String domain = "http://cfe.sve-test2.datahub-testzone.com";
-//        String port = "8080";
         retrofit = getHostAdapter(domain, port);
 
         sessionService = retrofit.create(SessionService.class);
