@@ -177,7 +177,7 @@ public class ConnectFragment extends BaseFragment implements ConnectScreen{
 
     @Override
     public void success() {
-        mRouter.replace(new NextFragment());
+        mRouter.reset(new NextFragment());
     }
 
     private ConnectComponent getComponent() {

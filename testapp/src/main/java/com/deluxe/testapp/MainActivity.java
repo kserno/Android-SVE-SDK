@@ -34,35 +34,22 @@ public class MainActivity extends AppCompatActivity implements Router, FragmentM
         mUnbinder = ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         goTo(getInitialFragment());
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
+        } else {
             super.onBackPressed();
         }
     }
@@ -87,10 +74,12 @@ public class MainActivity extends AppCompatActivity implements Router, FragmentM
                 .commit();
     }
 
-
-
     @Override
     public void replaceAllWith(List<BaseFragment> fragments) {
+        if (fragments.isEmpty()) {
+            return;
+        }
+
         while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
         }
@@ -115,9 +104,8 @@ public class MainActivity extends AppCompatActivity implements Router, FragmentM
 
     @Override
     public void onBackStackChanged() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-
-        }
+        int backStackSize = getSupportFragmentManager().getBackStackEntryCount();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backStackSize > 1);
     }
 
     private BaseFragment getInitialFragment() {
