@@ -95,7 +95,7 @@ public class ConnectFragment extends BaseFragment implements ConnectScreen{
 
     @OnClick(R.id.bt_connect)
     public void onConnectClicked() {
-        mPresenter.connect(this);
+        //mPresenter.connect(this);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class ConnectFragment extends BaseFragment implements ConnectScreen{
     @Override
     public void setBackend(Backend backend) {
         mEtBackend.setText(backend.getLabel());
-        mEtNpsUrl.setText(backend.getNPSUrl());
+        mEtNpsUrl.setText(backend.getNpsUrl());
         mEtPlayoutUrl.setText(backend.getPlayoutUrl());
     }
 
