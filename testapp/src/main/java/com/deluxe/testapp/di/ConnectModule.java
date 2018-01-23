@@ -1,6 +1,9 @@
 package com.deluxe.testapp.di;
 
+import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.Router;
+
+import javax.inject.Inject;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,4 +24,6 @@ public class ConnectModule {
     public Router providesRouter() {
         return mRouter;
     }
+
+
 }

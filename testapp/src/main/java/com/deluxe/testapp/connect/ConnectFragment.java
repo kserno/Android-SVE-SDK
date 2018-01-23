@@ -95,7 +95,13 @@ public class ConnectFragment extends BaseFragment implements ConnectScreen{
 
     @OnClick(R.id.bt_connect)
     public void onConnectClicked() {
-        //mPresenter.connect(this);
+        mPresenter.connect(this,
+                mEtPlayoutUrl.getText().toString(),
+                mEtNpsUrl.getText().toString(),
+                mEtTenantId.getText().toString(),
+                mEtDeviceType.getText().toString(),
+                mEtDeviceId.getText().toString()
+        );
     }
 
     @Override
@@ -168,16 +174,16 @@ public class ConnectFragment extends BaseFragment implements ConnectScreen{
     }
 
     @Override
-    public void applicationOutdated() {
-        new AlertDialog.Builder(getContext())
-                .setTitle(R.string.title_version_outdated)
-                .setMessage(R.string.error_version_outdated)
-                .show();
+    public void success() {
+        mRouter.reset(new NextFragment());
     }
 
     @Override
-    public void success() {
-        mRouter.reset(new NextFragment());
+    public void connectionError(String code) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Error")
+                .setMessage(code)
+                .show();
     }
 
     private ConnectComponent getComponent() {

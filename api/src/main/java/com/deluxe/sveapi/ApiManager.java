@@ -38,7 +38,7 @@ public class ApiManager implements Session {
 
     // TODO mcs services
 
-    private OkHttpClient getHttpLogInterceptor() {
+    protected OkHttpClient getHttpLogInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         Interceptor interceptorHeaders =  new Interceptor() {
             @Override
@@ -75,7 +75,7 @@ public class ApiManager implements Session {
                 .build();
     }
 
-    private Gson getGson() {
+    protected Gson getGson() {
         return new GsonBuilder()
 //                .registerTypeAdapter(LogoutResponse.class, new LogoutResponseTypeAdapter()) -> we can register adapters here
                 .create();

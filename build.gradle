@@ -31,4 +31,5 @@ ext {
     supportLibVersion = '26.1.0'
     butterknifeVersion = '8.8.1'
     mockitoVersion = '2.13.0'
+    guavaVersion = '23.6-android'
 }

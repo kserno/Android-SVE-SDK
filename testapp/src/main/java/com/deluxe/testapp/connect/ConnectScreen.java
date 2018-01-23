@@ -20,6 +20,6 @@ public interface ConnectScreen {
     void hideLoading();
 
     void reset();
-    void applicationOutdated();
     void success();
+    void connectionError(String code);
 }

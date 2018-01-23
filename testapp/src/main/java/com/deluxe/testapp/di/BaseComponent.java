@@ -1,5 +1,6 @@
 package com.deluxe.testapp.di;
 
+import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.BaseApplication;
 
 import javax.inject.Singleton;
@@ -12,4 +13,5 @@ import dagger.Component;
 @Component(modules = BaseModule.class)
 public interface BaseComponent {
     void inject(BaseApplication application);
+    SdkManager getSdkManager();
 }
