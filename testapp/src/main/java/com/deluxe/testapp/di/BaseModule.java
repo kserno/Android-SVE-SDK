@@ -1,5 +1,6 @@
 package com.deluxe.testapp.di;
 
+import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.BaseApplication;
 
 import dagger.Module;
@@ -11,13 +12,20 @@ import dagger.Provides;
 @Module
 public class BaseModule {
     private BaseApplication mApplication;
+    private SdkManager mSdkManager;
 
     public BaseModule(BaseApplication application) {
         mApplication = application;
+        mSdkManager = new SdkManager();
     }
 
     @Provides
     public BaseApplication providesBaseApplication() {
         return mApplication;
+    }
+
+    @Provides
+    public SdkManager providesSdkManager() {
+        return mSdkManager;
     }
 }
