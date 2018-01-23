@@ -62,8 +62,9 @@ public class ConnectPresenter {
 
 
     public void connect(ConnectScreen screen) {
+
         screen.showLoading();
-        SdkManager sdkManager = new SdkManager();
+        //SdkManager sdkManager = new SdkManager(npsUrl, );
 
 
     }
