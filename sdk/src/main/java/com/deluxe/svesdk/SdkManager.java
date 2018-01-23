@@ -1,5 +1,10 @@
 package com.deluxe.svesdk;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
+
 import com.deluxe.sveapi.ApiManager;
 import com.deluxe.sveapi.data.request.session.LoginRequest;
 import com.deluxe.sveapi.data.response.common.BaseResponse;
@@ -7,6 +12,7 @@ import com.deluxe.sveapi.data.response.session.SessionResponse;
 import com.deluxe.sveapi.utils.QueryParams;
 import com.deluxe.svesdk.mapper.common.BaseResponseMapper;
 import com.deluxe.svesdk.model.session.SessionModel;
+import com.deluxe.svesdk.utils.Consts;
 import com.deluxe.svesdk.utils.SessionRequestBuilder;
 
 import java.util.HashMap;
@@ -46,6 +52,40 @@ public class SdkManager {
         apiManager = new ApiManager(domain, port);
 
         globalQueryParams = new HashMap<>();
+        queryParamsSetup();
+    }
+
+    protected void queryParamsSetup() {
+        globalQueryParams.put(QueryParams.OS_ID, Build.VERSION.RELEASE.trim());
+        globalQueryParams.put(QueryParams.SC, "true");
+        globalQueryParams.put(QueryParams.TIME, "60");
+        globalQueryParams.put(QueryParams.LANG, "en");
+        globalQueryParams.put(QueryParams.M_TYPE, "xml");
+        globalQueryParams.put(QueryParams.SCL_VER, "0");
+        globalQueryParams.put(QueryParams.MA_VER, "4");
+        globalQueryParams.put(QueryParams.MI_VER, "0");
+        globalQueryParams.put(QueryParams.OMI_TYPE, "WEB_ANDROID");
+    }
+
+    public void onApplicationCreated(String deviceType, String deviceId, String tenantId, String swipeType, Consts.DRM_SOLUTION drmSolution) {
+        globalQueryParams.put(QueryParams.TENANT_ID, tenantId);
+
+        globalQueryParams.put(QueryParams.D_TYPE, deviceType);
+        globalQueryParams.put(QueryParams.DEVICE_TYPE, deviceType);
+
+        globalQueryParams.put(QueryParams.V_D_ID, deviceId);
+        globalQueryParams.put(QueryParams.D_ID, deviceId);
+        globalQueryParams.put(QueryParams.SWIPE_TYPE, swipeType);
+
+        sdkData.setDrmSolution(drmSolution);
+    }
+
+    /**
+     * Returns information of current session type.
+     * @return true if user is logged in.
+     */
+    public  boolean isUserLoggedIn () {
+        return (sdkData.getSessionType()==Consts.LOGGED_IN);
     }
 
     /**
