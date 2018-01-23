@@ -2,6 +2,9 @@ package com.deluxe.svesdk.model.session;
 
 import java.io.Serializable;
 
+/**
+ * SDK translated model of Session responses.
+ */
 public class SessionModel implements Serializable {
 
     private boolean success;

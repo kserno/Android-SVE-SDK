@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
+ * Resp raw data object.
  */
 public class Resp implements Serializable {
 
