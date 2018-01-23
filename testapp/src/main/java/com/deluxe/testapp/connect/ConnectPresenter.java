@@ -62,7 +62,7 @@ public class ConnectPresenter {
 
     public void connect(ConnectScreen screen) {
         screen.showLoading();
-
+        screen.success();
 
         // SDK is not implemented enough yet
 
