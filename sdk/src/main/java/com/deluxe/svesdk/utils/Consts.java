@@ -1,11 +1,13 @@
 package com.deluxe.svesdk.utils;
 
 /**
- * Created by Martin on 1/23/2018.
+ * Constat values used across SDK.
  */
-
 public class Consts {
 
+    /**
+     * Drm solution options.
+     */
     public enum DRM_SOLUTION
     {
         NXP,
