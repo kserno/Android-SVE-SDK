@@ -1,11 +1,12 @@
 package com.deluxe.testapp.connect;
 
-import com.deluxe.sveapi.ApiManager;
+import com.deluxe.sveapi.utils.QueryParams;
+import com.deluxe.svesdk.ApiCallback;
 import com.deluxe.svesdk.SdkManager;
+import com.deluxe.svesdk.model.session.SessionModel;
 import com.deluxe.testapp.Backend;
+import com.google.common.base.Strings;
 
-
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -65,7 +66,7 @@ public class ConnectPresenter {
     }
 
 
-    public void connect(ConnectScreen screen,
+    public void connect(final ConnectScreen screen,
                         String playoutUrl,
                         String npsUrl,
                         String tenantId,
@@ -74,9 +75,51 @@ public class ConnectPresenter {
 
         screen.showLoading();
 
+        mSdkManager.setEndpoints(
+                fixUrl(playoutUrl),
+                fixUrl(npsUrl),
+                fixUrl(npsUrl)
+        );
 
-        mSdkManager.setEndpoints(playoutUrl, npsUrl, npsUrl);
+        if (!Strings.isNullOrEmpty(tenantId)) {
+            mSdkManager.getSdkData().getGlobalQueryParams().put(QueryParams.TENANT_ID, tenantId);
+        }
+        if (!Strings.isNullOrEmpty(deviceType)) {
+            mSdkManager.getSdkData().getGlobalQueryParams().put(QueryParams.D_TYPE, deviceType);
+            mSdkManager.getSdkData().getGlobalQueryParams().put(QueryParams.DEVICE_TYPE, deviceType);
+        }
+        if (!Strings.isNullOrEmpty(deviceId)) {
+            mSdkManager.getSdkData().getGlobalQueryParams().put(QueryParams.D_ID, deviceId);
+            mSdkManager.getSdkData().getGlobalQueryParams().put(QueryParams.V_D_ID, deviceId);
+        }
 
+        mSdkManager.aquireSession(new ApiCallback<SessionModel>() {
+            @Override
+            public void onResponse(SessionModel response) {
+                if (response.isSuccess()) {
+                    screen.success();
+                } else {
+                    screen.connectionError(response.getCode());
+                }
+                screen.hideLoading();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+                screen.connectionError(t.getMessage());
+                screen.hideLoading();
+            }
+        });
+
+
+    }
+
+    private String fixUrl(String url) {
+        if (url.endsWith("/")) {
+            return url;
+        }
+        return url + "/";
     }
 
 }

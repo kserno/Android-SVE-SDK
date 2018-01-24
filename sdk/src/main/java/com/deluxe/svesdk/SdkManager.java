@@ -23,9 +23,6 @@ import retrofit2.Response;
  */
 public class SdkManager {
 
-    protected String domain;
-    protected String port;
-
     protected ApiManager apiManager;
 
     protected SdkData sdkData;
@@ -175,6 +172,10 @@ public class SdkManager {
                 apiCallback.onFailure(t);
             }
         });
+    }
+
+    public SdkData getSdkData() {
+        return sdkData;
     }
 
 }

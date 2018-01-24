@@ -1,5 +1,6 @@
 package com.deluxe.testapp;
 
+import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.connect.ConnectPresenter;
 import com.deluxe.testapp.connect.ConnectScreen;
 
@@ -19,12 +20,13 @@ import org.mockito.MockitoAnnotations;
 public class ConnectPresenterTest {
 
     @Mock ConnectScreen mConnectScreen;
+    @Mock SdkManager mSdkManager;
     private ConnectPresenter mPresenter;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mPresenter = new ConnectPresenter();
+        mPresenter = new ConnectPresenter(mSdkManager);
     }
 
     @Test

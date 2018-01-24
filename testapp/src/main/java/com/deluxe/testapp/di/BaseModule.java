@@ -2,6 +2,7 @@ package com.deluxe.testapp.di;
 
 import com.deluxe.svesdk.SdkManager;
 import com.deluxe.testapp.BaseApplication;
+import com.deluxe.testapp.BaseFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,6 +12,7 @@ import dagger.Provides;
  */
 @Module
 public class BaseModule {
+
     private BaseApplication mApplication;
     private SdkManager mSdkManager;
 
