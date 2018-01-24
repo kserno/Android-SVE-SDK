@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="device_type">m_AndroidSTB</string>
+    <string name="swipe_device_type">receiver</string>
+</resources>

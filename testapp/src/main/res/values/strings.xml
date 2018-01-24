@@ -1,4 +1,25 @@
 <resources>
     <string name="app_name">Test App</string>
-    <string name="action_settings">Settings</string>
+    <string name="device_type">m_AndroidPhoneSmall</string>
+    <string name="swipe_device_type">controller</string>
+
+
+    <!-- Connect Screen -->
+    <string name="title_playout_url">Playout URL</string>
+    <string name="title_nps_url">NPS URL</string>
+    <string name="title_tenant_id">Tenant ID</string>
+    <string name="title_device_type">Device type</string>
+    <string name="title_device_id">Device ID</string>
+
+    <string name="title_select_backend">Select Backend</string>
+    <string name="title_select_tenant_id">Select Tenant ID</string>
+    <string name="title_select_device_type">Select Device type</string>
+    <string name="title_version_outdated">App version is outdated</string>
+
+    <string name="error_version_outdated">Update the app to continue</string>
+
+    <string name="action_reset">Reset</string>
+    <string name="action_connect">Connect</string>
+    <!-- Connect Screen end -->
+
 </resources>
